@@ -71,7 +71,7 @@ makenew () {
 
   find_replace "s/\"version\": \".*\"/\"version\": \"0.0.0\"/g"
   find_replace "s/0\.0\.0\.\.\./0.0.1.../g"
-  find_replace "s/Node.js Koa Microservice Skeleton/${mk_title}/g"
+  find_replace "s/Node.js App Skeleton/${mk_title}/g"
   find_replace "s/Package skeleton for a Node.js microservice\./${mk_description}/g"
   find_replace "s/Evan Sosenko/${mk_author}/g"
   find_replace "s/razorx@evansosenko\.com/${mk_email}/g"
