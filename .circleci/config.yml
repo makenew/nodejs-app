@@ -1,0 +1,286 @@
+---
+version: 2.1
+
+executors:
+  node:
+    parameters:
+      tag:
+        type: string
+        default: latest
+    working_directory: ~/build
+    docker:
+      - image: node:<< parameters.tag >>
+  docker:
+    working_directory: /app
+    docker:
+      - image: docker:stable-git
+  alpine:
+    working_directory: /app
+    docker:
+      - image: alpine
+
+commands:
+  setup:
+    description: Setup environment
+    parameters:
+      is_alpine:
+        type: boolean
+        default: false
+    steps:
+      - when:
+          condition: << parameters.is_alpine >>
+          steps:
+            - run:
+                name: Install Alpine Linux build dependencies
+                command: apk add --no-cache ca-certificates git openssh-client
+      - checkout
+      - when:
+          condition: << parameters.is_alpine >>
+          steps:
+            - run:
+                name: Save Alpine Linux version
+                command: |
+                  echo "alpine: $(cat /etc/alpine-release)" >> .versions
+      - run:
+          name: Save Node.js and Yarn versions
+          command: |
+            echo "node: ${NODE_VERSION}" >> .versions
+            echo "yarn: ${YARN_VERSION}" >> .versions
+            cat .versions
+  install:
+    description: Install dependencies
+    parameters:
+      save_cache:
+        type: boolean
+        default: true
+    steps:
+      - restore_cache:
+          key: yarn-cache-{{ arch }}-{{ checksum ".versions" }}-
+      - restore_cache:
+          key: node-modules-{{ arch }}-{{ checksum ".versions" }}-{{ checksum "yarn.lock" }}
+      - run:
+          name: Set yarn cache
+          command: yarn config set cache-folder $HOME/.yarn-cache
+      - run:
+          name: Add npm authentication token
+          command: echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
+      - run:
+          name: Install dependencies
+          command: yarn install --frozen-lockfile --non-interactive
+      - when:
+          condition: << parameters.save_cache >>
+          steps:
+            - save_cache:
+                key: yarn-cache-{{ arch }}-{{ checksum ".versions" }}-{{ epoch }}
+                paths: ~/.yarn-cache
+            - save_cache:
+                key: node-modules-{{ arch }}-{{ checksum ".versions" }}-{{ checksum "yarn.lock" }}
+                paths: node_modules
+jobs:
+  test:
+    description: Test Node.js package
+    parameters:
+      tag:
+        type: string
+        default: latest
+      is_alpine:
+        type: boolean
+        default: false
+      upload_coverage:
+        type: boolean
+        default: false
+    executor:
+      name: node
+      tag: << parameters.tag >>
+    steps:
+      - setup:
+          is_alpine: << parameters.is_alpine >>
+      - install
+      - run:
+          name: Test package
+          command: yarn test
+      - run:
+          name: Build package
+          command: yarn run build
+      - when:
+          condition: << parameters.upload_coverage >>
+          steps:
+            - run:
+                name: Upload coverage to Codecov
+                command: |
+                  if [[ -n "${CODECOV_TOKEN}" ]]; then
+                    yarn global add codecov
+                    codecov
+                  fi
+  publish:
+    description: Publish Node.js package
+    executor:
+      name: node
+      tag: dubnium
+    steps:
+      - setup
+      - install
+      - run:
+          name: Build package
+          command: yarn run build
+      - run:
+          name: Install build dependencies
+          command: apt-get update && apt-get install -y jq
+      - deploy:
+          name: Publish package
+          command: .circleci/publish.sh
+  package:
+    description: Build Node.js package
+    executor:
+      name: node
+      tag: dubnium
+    steps:
+      - setup
+      - install
+      - run:
+          name: Build package
+          command: yarn run build
+      - run:
+          name: Create package
+          command: yarn pack
+      - run:
+          name: Extract package
+          command: tar -xzf *.tgz
+      - persist_to_workspace:
+          root: .
+          paths:
+            - package
+  push:
+    description: Build and push Docker container
+    parameters:
+      is_ci:
+        type: boolean
+        default: false
+    executor:
+      name: docker
+    environment:
+      APP_NAME: 'nodejs/app'
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - checkout
+      - setup_remote_docker:
+          version: 18.09.3
+          docker_layer_caching: true
+      - run:
+          name: Install build dependencies
+          command: apk add --no-cache bash jq
+      - run:
+          name: Move package to working directory
+          command: mv /tmp/workspace/package .
+      - run:
+          name: Create package.json.tmp
+          command: |
+            jq '.version="0.0.0"' package/package.json > package/package.json.tmp
+      - run:
+          name: Build Docker image
+          command: |
+            docker build --tag $APP_NAME \
+              --build-arg=NPM_TOKEN=$NPM_TOKEN \
+              -f .circleci/Dockerfile .
+      - deploy:
+          name: Push Docker image to Docker Hub
+          command: |
+            if [[ -n "${DOCKERHUB_REPOSITORY}" ]]; then
+              .circleci/push-dockerhub.sh
+            fi
+      - when:
+          unless: << parameters.is_ci >>
+          steps:
+            - deploy:
+                name: Push Docker image to Bintray
+                command: |
+                  if [[ -n "${BINTRAY_REPOSITORY}" ]]; then
+                    .circleci/push-bintray.sh
+                  fi
+            - deploy:
+                name: Push Docker image to ECR
+                command: |
+                  if [[ -n "${AWS_ECR_REPOSITORY}" ]]; then
+                    .circleci/push-ecr.sh
+                  fi
+            - deploy:
+                name: Push Docker image to Heroku
+                command: |
+                  if [[ -n "${HEROKU_APP}" ]]; then
+                    .circleci/push-heroku.sh
+                  fi
+  server:
+    description: Smoke test Server
+    working_directory: ~/build
+    docker:
+      - image: node:dubnium
+      - image: $DOCKERHUB_REPOSITORY:ci.$CIRCLE_SHA1
+        environment:
+          NODE_ENV: test
+          PORT: 9001
+        auth:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD
+    steps:
+      - setup
+      - install
+      - run:
+          name: Test server
+          command: yarn run test:smoke
+  deploy:
+    executor:
+      name: alpine
+    steps:
+      - setup:
+          is_alpine: true
+      - run:
+          name: Install build dependencies
+          command: apk add --no-cache bash jq
+      - deploy:
+          name: Deploy
+          command: .circleci/deploy.sh
+
+references:
+  branches: &branches
+    only: /^(v(er)?\/?[0-9].*|master)/
+  push_or_publish: &push_or_publish
+    filters:
+      branches:
+        <<: *branches
+    requires:
+      - test
+      - test-alpine
+      - test-server
+
+workflows:
+  default:
+    jobs:
+      - test:
+          name: test
+          tag: dubnium
+          upload_coverage: true
+      - test:
+          name: test-alpine
+          tag: dubnium-alpine
+          is_alpine: true
+      - package
+      - push:
+          name: push-ci
+          requires:
+            - package
+          is_ci: true
+      - server:
+          name: test-server
+          requires:
+            - push-ci
+      - publish:
+          <<: *push_or_publish
+      - push:
+          <<: *push_or_publish
+      - deploy:
+          filters:
+            branches:
+              <<: *branches
+          requires:
+            - push

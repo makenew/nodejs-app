@@ -1,0 +1,14 @@
+{
+  "health": {
+    "maxUnhealthyDuration": 0
+  },
+  "log": {
+    "outputMode": "short"
+  },
+  "koa": {
+    "logger": {
+      "useDev": false
+    }
+  },
+  "port": 9001
+}

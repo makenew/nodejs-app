@@ -1,0 +1,7 @@
+{
+  "health": {
+    "maxUnhealthyDuration": 0
+  },
+  "shutdownOnChange": false,
+  "port": 9000
+}

@@ -1,0 +1,152 @@
+{
+  "name": "@makenew/nodejs-app",
+  "version": "0.0.0",
+  "description": "Package skeleton for a Node.js microservice.",
+  "main": "dist/index.js",
+  "module": "index.js",
+  "sideEffects": false,
+  "keywords": [
+    "koa",
+    "node"
+  ],
+  "homepage": "https://github.com/makenew/nodejs-app",
+  "bugs": "https://github.com/makenew/nodejs-app/issues",
+  "repository": "makenew/nodejs-app",
+  "license": "MIT",
+  "author": {
+    "name": "Evan Sosenko",
+    "email": "razorx@evansosenko.com"
+  },
+  "files": [
+    "yarn.lock",
+    "index.js",
+    "server.js",
+    "server",
+    "config/!(env|local)*",
+    "lib",
+    "data",
+    "dist",
+    "docs"
+  ],
+  "scripts": {
+    "test": "nyc ava",
+    "pretest": "npm-run-all lint",
+    "test:update": "ava --update-snapshots",
+    "test:watch": "ava --watch",
+    "test:inspect": "node --inspect node_modules/ava/profile",
+    "test:inspect:watch": "nodemon --inspect node_modules/ava/profile",
+    "test:smoke": "ava 'test/**/*.test.js'",
+    "test:smoke:update": "ava --update-snapshots 'test/**/*.test.js'",
+    "test:smoke:watch": "ava --watch 'test/**/*.test.js'",
+    "lint": "gulp lint",
+    "lint:watch": "gulp watch",
+    "clean": "del dist",
+    "build": "npm-run-all --parallel build:*",
+    "prebuild": "npm-run-all clean",
+    "build:index": "babel --source-maps --out-dir dist index.js",
+    "build:lib": "babel --source-maps --ignore='**/*.spec.js' --out-dir dist/lib lib",
+    "build:server": "babel --source-maps --ignore='**/*.spec.js' --out-dir dist/server server",
+    "dist": "npm-run-all build",
+    "predist": "npm-run-all test",
+    "preversion": "npm-run-all dist",
+    "postversion": "git push && git push --tags",
+    "server": "babel-node server/index",
+    "server:watch": "nodemon --exec babel-node server/index",
+    "server:inspect": "babel-node --inspect server/index",
+    "server:inspect:watch": "nodemon --exec babel-node --inspect server/index",
+    "server:test": "NODE_ENV=test babel-node server/index",
+    "server:test:watch": "NODE_ENV=test nodemon --exec babel-node server/index",
+    "server:test:inspect": "NODE_ENV=test babel-node --inspect server/index",
+    "server:test:inspect:watch": "NODE_ENV=test nodemon --exec babel-node --inspect server/index",
+    "example": "babel-node examples",
+    "example:watch": "nodemon --exec babel-node examples",
+    "example:inspect": "babel-node --inspect examples",
+    "example:inspect:watch": "nodemon --exec babel-node --inspect examples",
+    "profile": "0x --output-dir tmp/0x.{timestamp} --output-html {outputDir}/index.html server.js",
+    "format": "standard --fix",
+    "report": "nyc report"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ]
+  },
+  "ava": {
+    "files": [
+      "**/*.spec.js",
+      "!dist/**/*",
+      "!package/**/*"
+    ],
+    "require": [
+      "@babel/register"
+    ]
+  },
+  "nyc": {
+    "exclude": [
+      "**/index.js",
+      "server.js",
+      "server/boot.js",
+      "server/filters.js",
+      "lib/app.js",
+      "lib/dependencies.js",
+      "lib/lifecycle/**/*.js",
+      "config/**/*.js",
+      "dist/**/*.js",
+      "package/**/*.js",
+      "examples/**/*.js",
+      "**/*.test.js",
+      "**/*.spec.js"
+    ],
+    "reporter": [
+      "html",
+      "lcov",
+      "text"
+    ]
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "**/*.spec.js",
+      "test/",
+      "tmp/"
+    ]
+  },
+  "engines": {
+    "node": ">=10.13.0"
+  },
+  "dependencies": {
+    "@meltwater/mlabs-health": "^1.3.0",
+    "@meltwater/mlabs-koa": "^7.7.0",
+    "awilix": "^4.0.0",
+    "koa": "^2.5.0",
+    "prom-client": "^11.0.0",
+    "source-map-support": "^0.5.9"
+  },
+  "devDependencies": {
+    "0x": "^4.7.2",
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.1",
+    "@babel/node": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "@meltwater/examplr": "^4.2.0",
+    "ava": "^1.0.1",
+    "del-cli": "^1.0.0",
+    "gulp": "^4.0.0",
+    "gulp-cli": "^2.0.0",
+    "gulp-jsonlint": "^1.1.2",
+    "gulp-standard": "^12.0.0",
+    "gulp-watch": "^5.0.0",
+    "gulplog": "^1.0.0",
+    "nodemon": "^1.11.0",
+    "npm-run-all": "^4.1.2",
+    "nyc": "^14.0.0",
+    "standard": "^12.0.1"
+  }
+}
