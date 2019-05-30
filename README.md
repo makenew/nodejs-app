@@ -136,7 +136,7 @@ To run locally, add configuration to `config/local.json`,
 then pull and run the image with
 
 ```
-$ docker run --read-only --init --publish 80:8080 \
+$ docker run --read-only --init --publish 8080:8080 \
   --volume "$(pwd)/config/local.json:/usr/src/app/config/local.json" \
   makenew/nodejs-app
 ```
