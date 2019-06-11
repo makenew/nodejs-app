@@ -35,9 +35,9 @@
     "test:watch": "ava --watch",
     "test:inspect": "node --inspect node_modules/ava/profile",
     "test:inspect:watch": "nodemon --inspect node_modules/ava/profile",
-    "test:smoke": "ava 'test/**/*.test.js'",
-    "test:smoke:update": "ava --update-snapshots 'test/**/*.test.js'",
-    "test:smoke:watch": "ava --watch 'test/**/*.test.js'",
+    "test:smoke": "SMOKE_TEST=true ava",
+    "test:smoke:update": "SMOKE_TEST=true ava --update-snapshots",
+    "test:smoke:watch": "SMOKE_TEST=true ava --watch",
     "lint": "gulp lint",
     "lint:watch": "gulp watch",
     "clean": "del dist",
@@ -76,16 +76,6 @@
           }
         }
       ]
-    ]
-  },
-  "ava": {
-    "files": [
-      "**/*.spec.js",
-      "!dist/**/*",
-      "!package/**/*"
-    ],
-    "require": [
-      "@babel/register"
     ]
   },
   "nyc": {
@@ -136,7 +126,7 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/register": "^7.0.0",
     "@meltwater/examplr": "^4.2.0",
-    "ava": "^1.0.1",
+    "ava": "^2.1.0",
     "del-cli": "^2.0.0",
     "gulp": "^4.0.0",
     "gulp-cli": "^2.0.0",
