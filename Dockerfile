@@ -1,4 +1,4 @@
-FROM node:dubnium-alpine as build
+FROM node:erbium-alpine as build
 
 ARG NPM_TOKEN
 
@@ -14,7 +14,7 @@ RUN yarn run build \
  && yarn pack \
  && tar -xzf *.tgz
 
-FROM node:dubnium-alpine as install
+FROM node:erbium-alpine as install
 
 ARG NPM_TOKEN
 
@@ -27,7 +27,7 @@ RUN yarn install --production --pure-lockfile
 RUN rm -f .npmrc
 COPY --from=build /usr/src/app .
 
-FROM node:dubnium-alpine
+FROM node:erbium-alpine
 
 RUN apk add --no-cache ca-certificates
 

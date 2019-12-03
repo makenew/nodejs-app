@@ -1,4 +1,4 @@
-FROM node:dubnium-alpine as build
+FROM node:erbium-alpine as build
 
 ARG NPM_TOKEN
 
@@ -13,7 +13,7 @@ RUN rm -f .npmrc
 COPY package .
 RUN rm -f package.json.tmp
 
-FROM node:dubnium-alpine
+FROM node:erbium-alpine
 
 RUN apk add --no-cache ca-certificates
 
