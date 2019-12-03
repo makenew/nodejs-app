@@ -166,7 +166,7 @@ jobs:
       - checkout
       - setup_remote_docker:
           version: 18.09.3
-          docker_layer_caching: true
+          docker_layer_caching: false
       - run:
           name: Install build dependencies
           command: apk add --no-cache bash jq
