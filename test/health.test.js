@@ -3,14 +3,14 @@ import { httpGetJson } from '@meltwater/mlabs-koa'
 
 import { loadConfig } from '../server/index'
 
-test.beforeEach(async t => {
+test.beforeEach(async (t) => {
   const config = await loadConfig()
   t.context.httpOptions = {
     port: config.get('port')
   }
 })
 
-test('get health', async t => {
+test('get health', async (t) => {
   const res = await httpGetJson({
     ...t.context.httpOptions,
     path: '/health'

@@ -1,11 +1,7 @@
 import path from 'path'
 import { promisify } from 'util'
 
-export default async (
-  configFactory,
-  /* istanbul ignore next */
-  root = '../'
-) => {
+export default async (configFactory, root = '../') => {
   const config = await getConfig(configFactory)
   const dataPath = path.resolve(__dirname, root, 'data')
   const logRedaction = config.get('logRedaction') || {}
@@ -31,6 +27,5 @@ export default async (
   })
 }
 
-const getConfig = configFactory => promisify(
-  (...args) => configFactory.create(...args)
-)()
+const getConfig = (configFactory) =>
+  promisify((...args) => configFactory.create(...args))()

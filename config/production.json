@@ -3,10 +3,7 @@
     "useExtreme": true
   },
   "logRedaction": {
-    "authorization": [
-      "req.headers.cookie",
-      "req.headers.authorization"
-    ]
+    "authorization": ["req.headers.cookie", "req.headers.authorization"]
   },
   "health": {
     "maxUnhealthyDuration": 60000

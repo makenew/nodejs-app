@@ -10,10 +10,10 @@ const defaultExec = (run, configFactory, callback) => {
 
 const boot = (exec = defaultExec) => {
   try {
-    const root = path.basename(path.resolve(__dirname, '../')) === 'dist'
-    /* istanbul ignore next */
-      ? '../../'
-      : '../'
+    const root =
+      path.basename(path.resolve(__dirname, '../')) === 'dist'
+        ? '../../'
+        : '../'
     const configPath = path.resolve(__dirname, root, 'config')
 
     const { configFactory, run, exit, watcher, ready } = createServer({
@@ -27,12 +27,15 @@ const boot = (exec = defaultExec) => {
       if (booted) return
       booted = true
       configure(configFactory, root)
-        .then(() => new Promise((resolve, reject) => {
-          exec(run, configFactory, err => {
-            if (err) reject(err)
-            resolve()
-          })
-        }))
+        .then(
+          () =>
+            new Promise((resolve, reject) => {
+              exec(run, configFactory, (err) => {
+                if (err) reject(err)
+                resolve()
+              })
+            })
+        )
         .catch(exit)
     }
 
@@ -44,21 +47,22 @@ const boot = (exec = defaultExec) => {
   }
 }
 
-export const loadConfig = () => new Promise((resolve, reject) => {
-  boot((run, configFactory) => {
-    try {
-      configFactory.create((err, config) => {
-        try {
-          if (err) throw err
-          resolve(config)
-        } catch (err) {
-          reject(err)
-        }
-      })
-    } catch (err) {
-      reject(err)
-    }
+export const loadConfig = () =>
+  new Promise((resolve, reject) => {
+    boot((run, configFactory) => {
+      try {
+        configFactory.create((err, config) => {
+          try {
+            if (err) throw err
+            resolve(config)
+          } catch (err) {
+            reject(err)
+          }
+        })
+      } catch (err) {
+        reject(err)
+      }
+    })
   })
-})
 
 export default boot

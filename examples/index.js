@@ -9,16 +9,11 @@ export const examples = {
   health
 }
 
-const envVars = [
-  'KOA_API',
-  'LOG_LEVEL',
-  'LOG_FILTER',
-  'LOG_OUTPUT_MODE'
-]
+const envVars = ['KOA_API', 'LOG_LEVEL', 'LOG_FILTER', 'LOG_OUTPUT_MODE']
 
 const defaultOptions = {}
 
-const serverOptions = config => {
+const serverOptions = (config) => {
   const host = 'http://localhost'
   const port = config.get('port')
 
