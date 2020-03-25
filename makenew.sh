@@ -66,7 +66,7 @@ makenew () {
   dockerhub="https://hub.docker.com/r/${mk_user}/${mk_repo}"
   read -p "> Ensure the Docker Hub repository exists at ${dockerhub} then press enter." mk_null
 
-  sed_delete README.md '12,128d'
+  sed_delete README.md '12,130d'
   sed_insert README.md '12i' 'TODO'
 
   find_replace "s/\"version\": \".*\"/\"version\": \"0.0.0\"/g"
