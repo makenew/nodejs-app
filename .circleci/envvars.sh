@@ -66,11 +66,6 @@ help_aws_ecr () {
   echo
 }
 
-help_drone () {
-  echo
-  echo '> Trigger deploys with Drone by setting the following environment variables.'
-}
-
 command -v jq >/dev/null 2>&1 || \
   (echo 'jq required: https://stedolan.github.io/jq/' && exit 2)
 
