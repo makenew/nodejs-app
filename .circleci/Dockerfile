@@ -1,10 +1,14 @@
-FROM node:erbium-alpine as build
+FROM node:erbium-alpine as base
+
+WORKDIR /usr/src/app
+
+RUN apk add --no-cache \
+      ca-certificates
+
+FROM base as install
 
 ARG NPM_TOKEN
 
-RUN apk add --no-cache ca-certificates
-
-WORKDIR /usr/src/app
 COPY package/package.json.tmp ./package.json
 COPY package/yarn.lock ./
 RUN echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
@@ -13,12 +17,9 @@ RUN rm -f .npmrc
 COPY package .
 RUN rm -f package.json.tmp
 
-FROM node:erbium-alpine
+FROM base
 
-RUN apk add --no-cache ca-certificates
-
-WORKDIR /usr/src/app
-COPY --from=build /usr/src/app .
+COPY --from=install /usr/src/app .
 COPY package/package.json .
 
 ENV NODE_ENV=production \

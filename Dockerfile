@@ -1,10 +1,14 @@
-FROM node:erbium-alpine as build
+FROM node:erbium-alpine as base
+
+WORKDIR /usr/src/app
+
+RUN apk add --no-cache \
+      ca-certificates
+
+FROM base as build
 
 ARG NPM_TOKEN
 
-RUN apk add --no-cache ca-certificates tar
-
-WORKDIR /usr/src/app
 COPY package.json yarn.lock ./
 RUN echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
 RUN yarn install --pure-lockfile
@@ -14,24 +18,18 @@ RUN yarn run build \
  && yarn pack \
  && tar -xzf *.tgz
 
-FROM node:erbium-alpine as install
+FROM base as install
 
 ARG NPM_TOKEN
 
-RUN apk add --no-cache ca-certificates
-
-WORKDIR /usr/src/app
 COPY --from=build /usr/src/app/package/package.json ./usr/src/app/package/yarn.lock ./
 RUN echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
 RUN yarn install --production --pure-lockfile
 RUN rm -f .npmrc
 COPY --from=build /usr/src/app/package .
 
-FROM node:erbium-alpine
+FROM base
 
-RUN apk add --no-cache ca-certificates
-
-WORKDIR /usr/src/app
 COPY --from=install /usr/src/app .
 
 ENV NODE_ENV=production \
