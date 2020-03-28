@@ -195,6 +195,25 @@ The only officially supported environment variables are
 [confit]: https://github.com/krakenjs/confit
 [mlabs-koa config]: https://github.com/meltwater/mlabs-koa/tree/master/docs#config-and-middleware
 
+## Installation
+
+This app is also published as a package on [npm].
+
+Add this as a dependency to your project using [npm] with
+
+```
+$ npm install @makenew/nodejs-app
+```
+
+or using [Yarn] with
+
+```
+$ yarn add @makenew/nodejs-app
+```
+
+[npm]: https://www.npmjs.com/
+[Yarn]: https://yarnpkg.com/
+
 ## Development and Testing
 
 ### Quickstart
