@@ -165,7 +165,7 @@ jobs:
           at: /tmp/workspace
       - checkout
       - setup_remote_docker:
-          version: 18.09.3
+          version: 19.03.8
           docker_layer_caching: false
       - run:
           name: Install build dependencies
