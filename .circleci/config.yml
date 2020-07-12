@@ -189,8 +189,8 @@ jobs:
             if [[ -n "${DOCKERHUB_REPOSITORY}" ]]; then
               .circleci/push-dockerhub.sh
             fi
-      - when:
-          unless: << parameters.is_ci >>
+      - unless:
+          condition: << parameters.is_ci >>
           steps:
             - deploy:
                 name: Push Docker image to Bintray
