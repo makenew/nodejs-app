@@ -341,6 +341,19 @@ If set, [CircleCI] will deploy images built from master directly to [Heroku].
 [Docker Hub]: https://hub.docker.com/
 [Heroku]: https://www.heroku.com/
 
+#### GitHub Actions
+
+*GitHub Actions should already be configured: this section is for reference only.*
+
+The following secrets must be set on the GitHub repo.
+
+- `GPG_PRIVATE_KEY`: The [GPG private key].
+- `GPG_PASSPHRASE`: The GPG key passphrase.
+- `GIT_USER_NAME`: The name to set for Git commits.
+- `GIT_USER_EMAIL`: The email to set for Git commits.
+
+[GPG private key]: https://github.com/marketplace/actions/import-gpg#prerequisites
+
 ### Development tasks
 
 Primary development tasks are defined under `scripts` in `package.json`
@@ -371,7 +384,11 @@ New versions are released when the commit message is a valid version number,
 and versions are only published on release branches:
 `master` branch or any branch matching `ver/*`.
 
+Publishing may be triggered using on the web
+using a [workflow_dispatch on GitHub Actions].
+
 [npm version]: https://docs.npmjs.com/cli/version
+[workflow_dispatch on GitHub Actions]: https://github.com/makenew/nodejs-app/actions?query=workflow%3Aversion
 
 #### Server
 
