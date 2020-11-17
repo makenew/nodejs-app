@@ -116,7 +116,7 @@ jobs:
     description: Publish Node.js package
     executor:
       name: node
-      tag: erbium
+      tag: fermium
     steps:
       - setup
       - install
@@ -133,7 +133,7 @@ jobs:
     description: Build Node.js package
     executor:
       name: node
-      tag: erbium
+      tag: fermium
     steps:
       - setup
       - install
@@ -214,7 +214,7 @@ jobs:
     description: Smoke test Server
     working_directory: ~/build
     docker:
-      - image: node:erbium
+      - image: node:fermium
       - image: $DOCKERHUB_REPOSITORY:ci.$CIRCLE_SHA1
         environment:
           NODE_ENV: test
@@ -258,11 +258,11 @@ workflows:
     jobs:
       - test:
           name: test
-          tag: erbium
+          tag: fermium
           upload_coverage: true
       - test:
           name: test-alpine
-          tag: erbium-alpine
+          tag: fermium-alpine
           is_alpine: true
       - package
       - push:
