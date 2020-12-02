@@ -1,6 +1,6 @@
 {
   "name": "@makenew/nodejs-app",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Package skeleton for a Node.js microservice.",
   "main": "dist/index.js",
   "module": "index.js",
