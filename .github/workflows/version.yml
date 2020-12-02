@@ -37,6 +37,10 @@ jobs:
           git-committer-email: ${{ secrets.GIT_USER_EMAIL }}
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
       - name: Install dependencies
         run: yarn install --frozen-lockfile --non-interactive
       - name: Cut version
