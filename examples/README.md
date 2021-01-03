@@ -99,7 +99,7 @@ to use server configuration values in your examples._
 2. Import and add the example to `examples/index.js`, e.g.,
    ```js
    /* examples/index.js */
-   import queryApi from './query-api'
+   import queryApi from './query-api.js'
 
    export const examples = {
      queryApi,
@@ -148,7 +148,7 @@ to use server configuration values in your examples._
 2. Import and add filters to `examples/index.js`, e.g.,
    ```js
    /* examples/index.js */
-   import filters from './filters'
+   import filters from './filters.js'
 
    const { runExample } = createExamples({
      filters,
