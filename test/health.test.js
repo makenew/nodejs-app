@@ -1,7 +1,7 @@
 import test from 'ava'
 import { httpGetJson } from '@meltwater/mlabs-koa'
 
-import { loadConfig } from '../server/index'
+import { loadConfig } from '../server/index.js'
 
 test.beforeEach(async (t) => {
   const config = await loadConfig()

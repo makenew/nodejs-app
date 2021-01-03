@@ -4,7 +4,7 @@ import { promisify } from 'util'
 
 import test from 'ava'
 
-import { boot } from '../server/index'
+import { boot } from '../server/index.js'
 
 const readFileAsync = promisify(fs.readFile)
 
