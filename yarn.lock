@@ -983,13 +983,13 @@
     pino "^6.3.2"
     pino-pretty "^4.0.0"
 
-"@meltwater/mlabs-health@^1.3.0":
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/@meltwater/mlabs-health/-/mlabs-health-1.5.1.tgz#025a7550361949d6c54efb1c1c211dd78c775216"
-  integrity sha512-H5kIAWnEYqz+IpbxfDehCMz/f2Wj0EoIp1/bHQuOmdxSOu5hyLAOvjphlsKBoDMs5EK3Ffx/13N8M2lveaKAfw==
+"@meltwater/mlabs-health@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@meltwater/mlabs-health/-/mlabs-health-2.0.0.tgz#22e3e44acfc8a1d0e6f96ab154f00183fe3d050b"
+  integrity sha512-TW7tWdT8Wa0TQ41oNvwDurU+e5PGjtrmzbJxTemkoGqPTQ6gMi2LyQrXbk2cWr0mYlhadC8gv21wk8unbedSyg==
   dependencies:
-    "@meltwater/mlabs-logger" "^6.0.0"
-    "@meltwater/phi" "^3.1.0"
+    "@meltwater/mlabs-logger" "^8.0.0"
+    "@meltwater/phi" "^4.0.0"
     cache-manager "^3.1.0"
     rxjs "^6.4.0"
     uuid "^8.1.0"
@@ -1027,10 +1027,28 @@
     debug "^4.0.1"
     pino "^6.3.2"
 
-"@meltwater/phi@^3.0.0", "@meltwater/phi@^3.1.0":
+"@meltwater/mlabs-logger@^8.0.0":
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/@meltwater/mlabs-logger/-/mlabs-logger-8.0.0.tgz#8f854935d5cb896e8ec74f38630bfc3caf0d5aa8"
+  integrity sha512-OHQJr/gQhojLNWLE0hAUnavRVzUYhezfFXdIa/+isjXfVH9ktjw4TsHnSE+j8j11kOdGEjD6mdXvUbVHLqaoYw==
+  dependencies:
+    "@meltwater/examplr" "^6.0.0"
+    bunyan-formatter "^1.0.0"
+    debug "^4.0.1"
+    pino "^6.3.2"
+
+"@meltwater/phi@^3.0.0":
   version "3.10.0"
   resolved "https://registry.yarnpkg.com/@meltwater/phi/-/phi-3.10.0.tgz#d05a9235ed1d79ee727f683c3699a97558d592a6"
   integrity sha512-ojMaSpdD3L5uBJ8PaLcEr//RGjh0R10BDelWYewEDuCXNHbdQFvapkH9kSBvclobror0kFbrYwKFlvUg7R5vnw==
+  dependencies:
+    ramda "~0.27.1"
+    ramda-adjunct "~2.29.0"
+
+"@meltwater/phi@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@meltwater/phi/-/phi-4.0.0.tgz#c8b3956e9eeb9343a67ddec17168386216351b5f"
+  integrity sha512-1Sdtxz5KTR0q3ikehWJcxdYYx2Cw7UYXBDdinVKJnKIETXoTu42aG8f/FMrBFVye9eP8Ny5B9ooESY8J2F2KhQ==
   dependencies:
     ramda "~0.27.1"
     ramda-adjunct "~2.29.0"
