@@ -963,16 +963,6 @@
     methods "^1.1.2"
     path-to-regexp "^6.1.0"
 
-"@meltwater/examplr@^5.0.0":
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/@meltwater/examplr/-/examplr-5.0.1.tgz#a2853438e20e5a822505d2ddb4a547fb2ba175a3"
-  integrity sha512-oSQ3Q0NJg261Su9WZjPPm3KmRE/q71M3l/G24q20sMxrnZQVZZnIVgJgOr/6oPLKzpbL411FXsHcNUhNYCxbrg==
-  dependencies:
-    bunyan-formatter "^1.0.0"
-    change-case "^4.1.1"
-    pino "^6.3.2"
-    pino-pretty "^4.0.0"
-
 "@meltwater/examplr@^6.0.0":
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/@meltwater/examplr/-/examplr-6.0.0.tgz#fe21f2fccf596194d68e232836827c10f90d3cb1"
@@ -994,16 +984,16 @@
     rxjs "^6.4.0"
     uuid "^8.1.0"
 
-"@meltwater/mlabs-koa@^9.0.0":
-  version "9.0.0"
-  resolved "https://registry.yarnpkg.com/@meltwater/mlabs-koa/-/mlabs-koa-9.0.0.tgz#061ab32bc1b0943618b5dad2f8c5f4336d27842f"
-  integrity sha512-C0f89snQ6ml4BxPYjo1QfScxG3hV0ISGr2VYzK2COpzkUAGWXEC7Jzq+659XjCezWlyvT4TJHnTbxqWgtgU5aQ==
+"@meltwater/mlabs-koa@^10.0.0":
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/@meltwater/mlabs-koa/-/mlabs-koa-10.0.0.tgz#d8bcd415d75922554da6b086dcb802ab346e8f15"
+  integrity sha512-IwTTNYnKvS5nAWwvK0YK/vG/SpgfQPxS4vAYnZAKZJ3YNX1pWz47UzH0kH9AJk2ReqbBQtyu/OpqLGZSig4Eeg==
   dependencies:
     "@hapi/boom" "^9.0.0"
     "@koa/cors" "^3.0.0"
     "@koa/router" "^10.0.0"
-    "@meltwater/mlabs-logger" "^6.0.0"
-    "@meltwater/phi" "^3.0.0"
+    "@meltwater/mlabs-logger" "^8.0.0"
+    "@meltwater/phi" "^4.0.0"
     awaiting "^3.0.0"
     change-case "^4.1.1"
     chokidar "^3.0.0"
@@ -1017,16 +1007,6 @@
     minimatch "^3.0.4"
     uuid "^8.0.0"
 
-"@meltwater/mlabs-logger@^6.0.0":
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/@meltwater/mlabs-logger/-/mlabs-logger-6.1.1.tgz#867565cdb17ae2b3811403a20151d3acd9095104"
-  integrity sha512-V3K5NwOTCAFTxdv7/7cNOiS1gDvw8igfXEEkLecbyzZ2kgXUo6XFZ7CuUCr4awUsLQ4zlNT9+OB4HnTftwS1PA==
-  dependencies:
-    "@meltwater/examplr" "^5.0.0"
-    bunyan-formatter "^1.0.0"
-    debug "^4.0.1"
-    pino "^6.3.2"
-
 "@meltwater/mlabs-logger@^8.0.0":
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/@meltwater/mlabs-logger/-/mlabs-logger-8.0.0.tgz#8f854935d5cb896e8ec74f38630bfc3caf0d5aa8"
@@ -1036,14 +1016,6 @@
     bunyan-formatter "^1.0.0"
     debug "^4.0.1"
     pino "^6.3.2"
-
-"@meltwater/phi@^3.0.0":
-  version "3.10.0"
-  resolved "https://registry.yarnpkg.com/@meltwater/phi/-/phi-3.10.0.tgz#d05a9235ed1d79ee727f683c3699a97558d592a6"
-  integrity sha512-ojMaSpdD3L5uBJ8PaLcEr//RGjh0R10BDelWYewEDuCXNHbdQFvapkH9kSBvclobror0kFbrYwKFlvUg7R5vnw==
-  dependencies:
-    ramda "~0.27.1"
-    ramda-adjunct "~2.29.0"
 
 "@meltwater/phi@^4.0.0":
   version "4.0.0"
