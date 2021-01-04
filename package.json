@@ -2,7 +2,12 @@
   "name": "@makenew/nodejs-app",
   "version": "4.1.0",
   "description": "Package skeleton for a Node.js microservice.",
-  "main": "dist/index.js",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "exports": {
+    "import": "./index.js",
+    "require": "./dist/index.cjs"
+  },
   "module": "index.js",
   "sideEffects": false,
   "keywords": [
@@ -43,25 +48,25 @@
     "clean": "del dist",
     "build": "npm-run-all --parallel build:*",
     "prebuild": "npm-run-all clean",
-    "build:index": "babel --source-maps --out-dir dist index.js",
-    "build:lib": "babel --source-maps --ignore='**/*.spec.js' --out-dir dist/lib lib",
-    "build:server": "babel --source-maps --ignore='**/*.spec.js' --out-dir dist/server server",
+    "build:index": "babel --source-maps --out-file-extension .cjs --out-dir dist index.js",
+    "build:lib": "babel --source-maps --ignore='**/*.spec.js' --out-file-extension .cjs --out-dir dist/server server",
+    "build:server": "babel --source-maps --ignore='**/*.spec.js' --out-file-extension .cjs --out-dir dist/lib lib",
     "dist": "npm-run-all build",
     "predist": "npm-run-all test",
     "preversion": "npm-run-all dist",
     "postversion": "git push && git push --tags",
-    "server": "babel-node server/index",
-    "server:watch": "nodemon --exec babel-node server/index",
-    "server:inspect": "babel-node --inspect server/index",
-    "server:inspect:watch": "nodemon --exec babel-node --inspect server/index",
-    "server:test": "NODE_ENV=test babel-node server/index",
-    "server:test:watch": "NODE_ENV=test nodemon --exec babel-node server/index",
-    "server:test:inspect": "NODE_ENV=test babel-node --inspect server/index",
-    "server:test:inspect:watch": "NODE_ENV=test nodemon --exec babel-node --inspect server/index",
-    "example": "babel-node examples",
-    "example:watch": "nodemon --exec babel-node examples",
-    "example:inspect": "babel-node --inspect examples",
-    "example:inspect:watch": "nodemon --exec babel-node --inspect examples",
+    "server": "node server.js",
+    "server:watch": "nodemon server.js",
+    "server:inspect": "node --inspect server.js",
+    "server:inspect:watch": "nodemon --inspect server.js",
+    "server:test": "NODE_ENV=test node server.js",
+    "server:test:watch": "NODE_ENV=test nodemon server.js",
+    "server:test:inspect": "NODE_ENV=test node server.js",
+    "server:test:inspect:watch": "NODE_ENV=test nodemon node --inspect server.js",
+    "example": "node examples",
+    "example:watch": "nodemon examples",
+    "example:inspect": "node --inspect examples",
+    "example:inspect:watch": "nodemon --inspect examples",
     "profile": "0x --output-dir tmp/0x.{timestamp} --output-html {outputDir}/index.html server.js",
     "pretty": "prettier --ignore-path .gitignore --write '**/*.(js|json|graphql)'",
     "format": "npm-run-all --serial pretty format:*",
@@ -69,6 +74,15 @@
     "report": "nyc report"
   },
   "babel": {
+    "plugins": [
+      [
+        "babel-plugin-add-import-extension",
+        {
+          "extension": "cjs",
+          "replace": true
+        }
+      ]
+    ],
     "presets": [
       [
         "@babel/preset-env",
@@ -128,8 +142,7 @@
     "@meltwater/mlabs-koa": "^10.0.0",
     "awilix": "^4.0.0",
     "koa": "^2.5.0",
-    "prom-client": "^13.0.0",
-    "source-map-support": "^0.5.9"
+    "prom-client": "^13.0.0"
   },
   "devDependencies": {
     "0x": "^4.7.2",
@@ -137,9 +150,9 @@
     "@babel/core": "^7.0.1",
     "@babel/node": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
-    "@babel/register": "^7.0.0",
     "@meltwater/examplr": "^6.0.0",
     "ava": "^3.3.0",
+    "babel-plugin-add-import-extension": "^1.4.3",
     "del-cli": "^3.0.0",
     "eslint": "^7.12.1",
     "gulp": "^4.0.0",

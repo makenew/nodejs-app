@@ -1,7 +1,3 @@
-'use strict'
+import { boot } from './server/index.js'
 
-require('source-map-support').install()
-
-const { boot } = require('./dist/server/index.js')
-
-if (require.main === module) boot()
+boot()

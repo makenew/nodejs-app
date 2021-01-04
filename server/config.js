@@ -1,9 +1,9 @@
 import path from 'path'
 import { promisify } from 'util'
 
-export default async (configFactory, root = '../') => {
+export default async (configFactory, root = process.cwd()) => {
   const config = await getConfig(configFactory)
-  const dataPath = path.resolve(__dirname, root, 'data')
+  const dataPath = path.resolve(root, 'data')
   const logRedaction = config.get('logRedaction') || {}
 
   configFactory.addOverride({

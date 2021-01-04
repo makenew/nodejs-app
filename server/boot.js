@@ -11,11 +11,8 @@ const defaultExec = (run, configFactory, callback) => {
 
 const boot = (exec = defaultExec) => {
   try {
-    const root =
-      path.basename(path.resolve(__dirname, '../')) === 'dist'
-        ? '../../'
-        : '../'
-    const configPath = path.resolve(__dirname, root, 'config')
+    const root = process.cwd()
+    const configPath = path.resolve(root, 'config')
 
     const { configFactory, run, exit, watcher, ready } = createServer({
       logFilters,
