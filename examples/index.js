@@ -22,29 +22,27 @@ const serverOptions = (config) => {
   }
 }
 
-if (require.main === module) {
-  boot((run, configFactory, callback) => {
-    try {
-      configFactory.create((err, config) => {
-        try {
-          if (err) throw err
+boot((run, configFactory, callback) => {
+  try {
+    configFactory.create((err, config) => {
+      try {
+        if (err) throw err
 
-          const { runExample } = createExamples({
-            examples,
-            envVars,
-            defaultOptions: { ...defaultOptions, ...serverOptions(config) }
-          })
+        const { runExample } = createExamples({
+          examples,
+          envVars,
+          defaultOptions: { ...defaultOptions, ...serverOptions(config) }
+        })
 
-          runExample({
-            local: path.resolve('examples', 'local.json')
-          })
-          callback()
-        } catch (err) {
-          callback(err)
-        }
-      })
-    } catch (err) {
-      callback(err)
-    }
-  })
-}
+        runExample({
+          local: path.resolve('examples', 'local.json')
+        })
+        callback()
+      } catch (err) {
+        callback(err)
+      }
+    })
+  } catch (err) {
+    callback(err)
+  }
+})
