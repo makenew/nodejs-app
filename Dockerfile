@@ -7,24 +7,14 @@ RUN apk add --no-cache \
 
 FROM base as build
 
-ARG NPM_TOKEN
-
-COPY package.json yarn.lock ./
-RUN echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
-RUN yarn install --pure-lockfile
-RUN rm -f .npmrc
 COPY . ./
-RUN yarn pack \
- && tar -xzf *.tgz
+RUN yarn pack
+RUN tar -xzf *.tgz
 
 FROM base as install
 
-ARG NPM_TOKEN
-
 COPY --from=build /usr/src/app/package/package.json ./usr/src/app/package/yarn.lock ./
-RUN echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
 RUN yarn install --production --pure-lockfile
-RUN rm -f .npmrc
 COPY --from=build /usr/src/app/package .
 
 FROM base
