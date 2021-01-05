@@ -1,6 +1,6 @@
 export default () => {
   const ext = process.env.SMOKE_TEST === 'true' ? 'test' : 'spec'
   return {
-    files: [`**/*.${ext}.js`, '!dist/**/*', '!package/**/*']
+    files: [`**/*.${ext}.js`, '!package/**/*']
   }
 }

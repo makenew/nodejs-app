@@ -8,7 +8,6 @@
     "lib/dependencies.js",
     "lib/lifecycle/**/*.js",
     "config/**/*.js",
-    "dist/**/*.js",
     "package/**/*.js",
     "examples/**/*.js",
     "**/*.test.js",

@@ -14,8 +14,7 @@ RUN echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
 RUN yarn install --pure-lockfile
 RUN rm -f .npmrc
 COPY . ./
-RUN yarn run build \
- && yarn pack \
+RUN yarn pack \
  && tar -xzf *.tgz
 
 FROM base as install
