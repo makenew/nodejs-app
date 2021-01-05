@@ -87,6 +87,18 @@ jobs:
   ghcr:
     runs-on: ubuntu-20.04
     steps:
+      - name: Get tag
+        uses: jungwinter/split@v1
+        id: tag
+        with:
+          msg: ${{ github.ref }}
+          seperator: /
+      - name: Get version
+        uses: jungwinter/split@v1
+        id: version
+        with:
+          msg: ${{ steps.tag.outputs._2 }}
+          seperator: v
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
@@ -101,4 +113,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ghcr.io/${{ github.repository }}:${{ github.ref }}
+          tags: ghcr.io/${{ github.repository }}:${{ steps.version.outputs._1 }}
