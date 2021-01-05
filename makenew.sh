@@ -57,17 +57,8 @@ makenew () {
   read -p '> GitHub user or organization name (my-user): ' mk_user
   read -p '> GitHub repository name (my-repo): ' mk_repo
 
-  circleci="https://circleci.com/gh/${mk_user}/${mk_repo}"
-  read -p "> Follow the CircleCI project at ${circleci} then press enter." mk_null
-
-  codecov="https://codecov.io/gh/${mk_user}/${mk_repo}"
-  read -p "> Ensure the Codecov project exists at ${codecov} then press enter." mk_null
-
-  dockerhub="https://hub.docker.com/r/${mk_user}/${mk_repo}"
-  read -p "> Ensure the Docker Hub repository exists at ${dockerhub} then press enter." mk_null
-
-  sed_delete README.md '12,130d'
-  sed_insert README.md '12i' 'TODO'
+  sed_delete README.md '10,118d'
+  sed_insert README.md '10i' 'TODO'
 
   find_replace "s/\"version\": \".*\"/\"version\": \"0.0.0\"/g"
   find_replace "s/0\.0\.0\.\.\./0.0.1.../g"
