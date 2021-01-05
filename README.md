@@ -121,14 +121,14 @@ and summarized under [Releases].
 
 ### Docker container
 
-The service is distributed as a Docker container on Docker Hub.
+The service is distributed as a Docker container on GitHub Container Registry.
 To run locally, add configuration to `config/local.json`,
 then pull and run the image with
 
 ```
 $ docker run --read-only --init --publish 8080:8080 \
   --volume "$(pwd)/config/local.json:/usr/src/app/config/local.json" \
-  makenew/nodejs-app
+  ghcr.io/makenew/nodejs-app
 ```
 
 ### Configuration
@@ -266,116 +266,46 @@ $ yarn install
 [Node.js debugging]: https://nodejs.org/en/docs/guides/debugging-getting-started/
 [npm]: https://www.npmjs.com/
 [nvm]: https://github.com/creationix/nvm
-[Yarn]: https://yarnpkg.com/
 
-#### CircleCI
+### Publishing
 
-_CircleCI should already be configured: this section is for reference only._
-
-The following environment variables must be set on [CircleCI].
-These may be set manually or by running the script `./circleci/envvars.sh`.
-
-##### npm
-
-- `NPM_TOKEN`: npm token for installing and publishing packages.
-- `NPM_TEAM`: npm team to grant read-only package access
-  (format `org:team`, optional).
-
-##### Codecov
-
-If set, [CircleCI] will send code coverage reports to [Codecov].
-
-- `CODECOV_TOKEN`: Codecov token for uploading coverage reports.
-
-##### Docker Hub
-
-If set, [CircleCI] will build, tag, and push images to [Docker Hub].
-
-- `DOCKERHUB_REPOSITORY`: Docker Hub repository name.
-- `DOCKERHUB_USERNAME`: Docker Hub username.
-- `DOCKERHUB_PASSWORD`: Docker Hub password.
-
-##### Bintray
-
-If set, [CircleCI] will build, tag, and push images to [Bintray].
-
-- `BINTRAY_REGISTRY`: Bintray registry name.
-- `BINTRAY_REPOSITORY`: Bintray repository name.
-- `BINTRAY_USERNAME`: Bintray username.
-- `BINTRAY_PASSWORD`: Bintray password (your API key).
-
-##### Amazon EC2 Container Registry (ECR)
-
-If set, [CircleCI] will build, tag, and push images to [Amazon ECR].
-
-- `AWS_ECR_REPOSITORY`: Amazon ECR repository name.
-- `AWS_ACCOUNT_ID`: Amazon account ID.
-- `AWS_DEFAULT_REGION`: AWS region.
-- `AWS_ACCESS_KEY_ID`: AWS access key ID.
-- `AWS_SECRET_ACCESS_KEY`: AWS secret access key.
-
-##### Heroku
-
-If set, [CircleCI] will deploy images built from master directly to [Heroku].
-
-- `HEROKU_APP`: Heroku application name.
-- `HEROKU_TOKEN`: Heroku authentication token.
-
-[Amazon ECR]: https://aws.amazon.com/ecr/
-[Bintray]: https://bintray.com/
-[CircleCI]: https://circleci.com/
-[Codecov]: https://codecov.io/
-[Docker Hub]: https://hub.docker.com/
-[Heroku]: https://www.heroku.com/
-
-#### GitHub Actions
-
-*GitHub Actions should already be configured: this section is for reference only.*
-
-The following secrets must be set on the GitHub repo.
-
-- `GPG_PRIVATE_KEY`: The [GPG private key].
-- `GPG_PASSPHRASE`: The GPG key passphrase.
-- `GIT_USER_NAME`: The name to set for Git commits.
-- `GIT_USER_EMAIL`: The email to set for Git commits.
-
-[GPG private key]: https://github.com/marketplace/actions/import-gpg#prerequisites
-
-### Development tasks
-
-Primary development tasks are defined under `scripts` in `package.json`
-and available via `yarn run`.
-View them with
-
-```
-$ yarn run
-```
-
-#### Production build
-
-Lint, test, and transpile the production build to `dist` with
-
-```
-$ yarn run dist
-```
-
-##### Publishing a new release
-
-Release a new version using [`npm version`][npm version].
-This will run all tests, update the version number,
-create and push a tagged commit,
-trigger CircleCI to publish the new version to npm,
-and build and push a tagged container to all configured registries.
-
-New versions are released when the commit message is a valid version number,
-and versions are only published on release branches:
-`master` branch or any branch matching `ver/*`.
+Use the [`npm version`][npm-version] command to release a new version.
+This will push a new git tag which will trigger a GitHub action.
 
 Publishing may be triggered using on the web
 using a [workflow_dispatch on GitHub Actions].
 
-[npm version]: https://docs.npmjs.com/cli/version
+[npm-version]: https://docs.npmjs.com/cli/version
 [workflow_dispatch on GitHub Actions]: https://github.com/makenew/nodejs-app/actions?query=workflow%3Aversion
+
+## GitHub Actions
+
+_GitHub Actions should already be configured: this section is for reference only._
+
+The following repository secrets must be set on [GitHub Actions]:
+
+- `NPM_TOKEN`: npm token for installing and publishing packages.
+- `GH_USER`: The GitHub user's username to pull and push containers.
+- `GH_TOKEN`: A personal access token for the user to pull and push containers.
+
+These must be set manually.
+
+### Secrets for Optional GitHub Actions
+
+The version and format GitHub actions
+require a user with write access to the repository
+including access to read and write packages.
+Set these additional secrets to enable the action:
+
+- `GH_TOKEN`: A personal access token for the user.
+- `GH_USER`: The GitHub user's username.
+- `GIT_USER_NAME`: The GitHub user's real name.
+- `GIT_USER_EMAIL`: The GitHub user's email.
+- `GPG_PASSPHRASE`: The GitHub user's GPG passphrase.
+- `GPG_PRIVATE_KEY`: The GitHub user's [GPG private key].
+
+[GitHub Actions]: https://github.com/features/actions
+[GPG private key]: https://github.com/marketplace/actions/import-gpg#prerequisites
 
 #### Server
 
@@ -529,7 +459,7 @@ $ yarn run test:inspect:watch test/server.spec.js
 
 Smoke tests make network requests directly against the service
 (running with `NODE_ENV=test`).
-On CircleCI, the tests run against the built container.
+On GitHub Actions, the tests run against the built container.
 
 To run smoke tests locally, start a test server with
 
@@ -555,20 +485,6 @@ Refer to the full list of scripts for additional watch and debug modes.
 [AVA snapshot testing]: https://github.com/avajs/ava#snapshot-testing
 [Codecov]: https://codecov.io/
 [Istanbul]: https://istanbul.js.org/
-
-### Docker
-
-The production Docker image is built on CircleCI from `.circleci/Dockerfile`:
-this Dockerfile can only be used with the CircleCI workflow.
-
-In rare cases, building an equivalent container locally may be useful.
-First, export a valid `NPM_TOKEN` in your environment,
-then build and run this local container with
-
-```
-$ docker build --build-arg=NPM_TOKEN=$NPM_TOKEN -t makenew/nodejs-app .
-$ docker run --read-only --init --publish 80:8080 makenew/nodejs-app
-```
 
 ## Contributing
 
