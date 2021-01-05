@@ -75,10 +75,7 @@ Bootstrap a new Node.js app in five minutes or less.
    This will replace the boilerplate, delete itself,
    remove the git remote, remove upstream tags,
    and stage changes for commit.
-4. Create the required CircleCI environment variables with
-   ```
-   $ .circleci/envvars.sh
-   ```
+4. Create the required GitHub repository secrets
 5. Review, commit, and push the changes to GitHub with
    ```
    $ git diff --cached
@@ -86,7 +83,7 @@ Bootstrap a new Node.js app in five minutes or less.
    $ git remote add origin git@github.com:<user>/<new-node-service>.git
    $ git push -u origin master
    ```
-6. Ensure the CircleCI build passes,
+6. Ensure the GitHub action passes,
    then publish the initial version of the package with
    ```
    $ nvm install
@@ -219,7 +216,6 @@ $ yarn install
 Run each command below in a separate terminal window:
 
 ```
-$ yarn run lint:watch
 $ yarn run test:watch
 $ yarn run server:watch
 ```
