@@ -1,9 +1,7 @@
 # Node.js App Skeleton
 
 [![npm](https://img.shields.io/npm/v/@makenew/nodejs-app.svg)](https://www.npmjs.com/package/@makenew/nodejs-app)
-[![Docker](https://img.shields.io/docker/pulls/makenew/nodejs-app.svg)](https://hub.docker.com/r/makenew/nodejs-app)
-[![Codecov](https://img.shields.io/codecov/c/github/makenew/nodejs-app.svg)](https://codecov.io/gh/makenew/nodejs-app)
-[![CircleCI](https://img.shields.io/circleci/project/github/makenew/nodejs-app.svg)](https://circleci.com/gh/makenew/nodejs-app)
+![main](https://github.com/makenew/nodejs-app/workflows/main/badge.svg)
 
 Package skeleton for a Node.js app.
 
@@ -13,24 +11,22 @@ Bootstrap a new Node.js app in five minutes or less.
 
 ### Features
 
-- [Node.js]'s [npm] package structure.
+- [Node.js] native [ECMAScript module] with [npm] package structure.
 - Fast, reliable, and secure dependency management with [Yarn].
 - [Alpine Linux] based multi-stage [Docker] builds for optimized production images.
 - Images tagged using package version and commit checksum.
-- Images pushed to [Docker Hub], [Heroku], [Bintray] and the [Amazon EC2 Container Registry (ECR)].
+- Images pushed to [GitHub Container Registry].
 - Configurable application lifecycle and middleware suite with [mlabs-koa].
 - Standardized JSON logging with [mlabs-logger].
 - Hierarchical application configuration with [confit].
 - Centralized dependency injection with [Awilix].
 - Health monitoring with [mlabs-health].
-- Next generation JavaScript with [Babel].
 - Examples with configurable options and arguments powered by [examplr].
-- Linting with the [JavaScript Standard Style] and [JSON Lint].
+- Linting with the [JavaScript Standard Style] using [ESLint].
 - [Prettier] code.
-- Automatically lint on changes with [gulp].
 - Futuristic debuggable unit testing with [AVA].
-- Code coverage reporting with [Istanbul], [nyc], and [Codecov].
-- Continuous unit and smoke testing and deployment with [CircleCI].
+- Code coverage reporting with [Istanbul] and [nyc].
+- Continuous testing and package publishing with [GitHub Actions].
 - Profiling with [0x].
 - [Keep a CHANGELOG].
 - Consistent coding with [EditorConfig].
@@ -39,18 +35,13 @@ Bootstrap a new Node.js app in five minutes or less.
 [0x]: https://github.com/davidmarkclements/0x
 [AVA]: https://github.com/avajs/ava
 [Alpine Linux]: https://alpinelinux.org/
-[Amazon EC2 Container Registry (ECR)]: https://aws.amazon.com/ecr/
 [Awilix]: https://github.com/jeffijoe/awilix
-[Babel]: https://babeljs.io/
-[Bintray]: https://bintray.com/
-[CircleCI]: https://circleci.com/
-[Codecov]: https://codecov.io/
 [Docker]: https://www.docker.com/
-[Docker Hub]: https://hub.docker.com/
+[ECMAScript module]: https://nodejs.org/api/esm.html
+[ESLint]: https://eslint.org/
 [EditorConfig]: https://editorconfig.org/
-[Heroku]: https://www.heroku.com/
+[GitHub Actions]: https://github.com/features/actions
 [Istanbul]: https://istanbul.js.org/
-[JSON Lint]: https://github.com/zaach/jsonlint
 [JavaScript Standard Style]: https://standardjs.com/
 [Keep a CHANGELOG]: https://keepachangelog.com/
 [Node.js]: https://nodejs.org/
@@ -58,10 +49,10 @@ Bootstrap a new Node.js app in five minutes or less.
 [Shields.io]: https://shields.io/
 [Yarn]: https://yarnpkg.com/
 [confit]: https://github.com/krakenjs/confit
-[gulp]: https://gulpjs.com/
 [mlabs-health]: https://github.com/meltwater/mlabs-health
 [mlabs-koa]: https://github.com/meltwater/mlabs-koa
 [mlabs-logger]: https://github.com/meltwater/mlabs-logger
+[examplr]: https://github.com/meltwater/node-examplr
 [npm]: https://www.npmjs.com/
 [nyc]: https://github.com/istanbuljs/nyc
 
