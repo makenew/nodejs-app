@@ -1,5 +1,5 @@
 export const noLifecycle = ({ isLifecycle }) => !isLifecycle
 
-export default {
+export const logFilters = {
   noLifecycle
 }

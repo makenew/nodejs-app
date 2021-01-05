@@ -2,14 +2,14 @@ import path from 'path'
 
 import { createDependencies } from '../index.js'
 import { configure, createServer } from './index.js'
-import logFilters from './filters.js'
+import { logFilters } from './filters.js'
 
 const defaultExec = (run, configFactory, callback) => {
   run(configFactory)
   callback()
 }
 
-const boot = (exec = defaultExec) => {
+export const boot = (exec = defaultExec) => {
   try {
     const root = process.cwd()
     const configPath = path.resolve(root, 'config')
@@ -62,5 +62,3 @@ export const loadConfig = () =>
       }
     })
   })
-
-export default boot

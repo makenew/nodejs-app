@@ -1,7 +1,7 @@
 import path from 'path'
 import { promisify } from 'util'
 
-export default async (configFactory, root = process.cwd()) => {
+export const configure = async (configFactory, root = process.cwd()) => {
   const config = await getConfig(configFactory)
   const dataPath = path.resolve(root, 'data')
   const logRedaction = config.get('logRedaction') || {}
