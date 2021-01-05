@@ -1,0 +1,18 @@
+{
+  "plugins": [
+    [
+      "babel-plugin-add-import-extension",
+      { "extension": "cjs", "replace": true }
+    ]
+  ],
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": "current"
+        }
+      }
+    ]
+  ]
+}

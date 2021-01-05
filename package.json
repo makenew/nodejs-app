@@ -73,63 +73,6 @@
     "format:js": "standard --fix",
     "report": "nyc report"
   },
-  "babel": {
-    "plugins": [
-      [
-        "babel-plugin-add-import-extension",
-        {
-          "extension": "cjs",
-          "replace": true
-        }
-      ]
-    ],
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "targets": {
-            "node": "current"
-          }
-        }
-      ]
-    ]
-  },
-  "nyc": {
-    "exclude": [
-      "**/index.js",
-      "server.js",
-      "server/boot.js",
-      "server/filters.js",
-      "lib/app.js",
-      "lib/dependencies.js",
-      "lib/lifecycle/**/*.js",
-      "config/**/*.js",
-      "dist/**/*.js",
-      "package/**/*.js",
-      "examples/**/*.js",
-      "**/*.test.js",
-      "**/*.spec.js"
-    ],
-    "reporter": [
-      "html",
-      "lcov",
-      "text"
-    ]
-  },
-  "nodemonConfig": {
-    "ignore": [
-      "**/*.spec.js",
-      "test/",
-      "tmp/"
-    ]
-  },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "jsxSingleQuote": true,
-    "trailingComma": "none",
-    "endOfLine": "lf"
-  },
   "engines": {
     "node": ">=14.15.0"
   },
