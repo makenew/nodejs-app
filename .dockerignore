@@ -148,7 +148,7 @@ dist
 .pnp.*
 
 # Docker exceptions
-.circleci
+.github
 .dockerignore
 .editorconfig
 .git
