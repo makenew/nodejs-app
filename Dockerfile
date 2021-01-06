@@ -5,6 +5,13 @@ WORKDIR /usr/src/app
 RUN apk add --no-cache \
       ca-certificates
 
+FROM base as preinstall
+
+RUN apk add --no-cache jq
+COPY package.json ./
+RUN jq '.version="0.0.0"' package.json > package.json.tmp \
+ && mv package.json.tmp package.json
+
 FROM base as build
 
 COPY . ./
@@ -13,7 +20,8 @@ RUN tar -xzf *.tgz
 
 FROM base as install
 
-COPY --from=build /usr/src/app/package/package.json ./usr/src/app/package/yarn.lock ./
+COPY --from=build /usr/src/app/package/yarn.lock ./
+COPY --from=preinstall /usr/src/app/package.json ./
 RUN yarn install --production --pure-lockfile
 COPY --from=build /usr/src/app/package .
 
