@@ -84,7 +84,7 @@ jobs:
         if: ${{ endsWith(github.ref, format('v{0}', steps.published-version.outputs.version)) == false }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  ghcr:
+  registry:
     runs-on: ubuntu-20.04
     steps:
       - name: Get tag
