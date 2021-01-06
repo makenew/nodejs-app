@@ -50,10 +50,10 @@ Bootstrap a new Node.js app in five minutes or less.
 [Shields.io]: https://shields.io/
 [Yarn]: https://yarnpkg.com/
 [confit]: https://github.com/krakenjs/confit
+[examplr]: https://github.com/meltwater/node-examplr
 [mlabs-health]: https://github.com/meltwater/mlabs-health
 [mlabs-koa]: https://github.com/meltwater/mlabs-koa
 [mlabs-logger]: https://github.com/meltwater/mlabs-logger
-[examplr]: https://github.com/meltwater/node-examplr
 [npm]: https://www.npmjs.com/
 [nyc]: https://github.com/istanbuljs/nyc
 
