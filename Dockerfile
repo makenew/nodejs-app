@@ -5,6 +5,10 @@ WORKDIR /usr/src/app
 RUN apk add --no-cache \
       ca-certificates
 
+RUN deluser --remove-home node \
+ && addgroup -S node -g 10000 \
+ && adduser -S -G node -u 10000 node
+
 FROM base as preinstall
 
 RUN apk add --no-cache jq
