@@ -154,4 +154,3 @@ dist
 .git
 .gitignore
 Dockerfile
-!package
