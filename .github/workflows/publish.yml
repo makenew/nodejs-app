@@ -57,17 +57,17 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Get tag
-        uses: jungwinter/split@v1
+        uses: jungwinter/split@v2
         id: tag
         with:
           msg: ${{ github.ref }}
-          seperator: /
+          separator: /
       - name: Get version
-        uses: jungwinter/split@v1
+        uses: jungwinter/split@v2
         id: version
         with:
           msg: ${{ steps.tag.outputs._2 }}
-          seperator: v
+          separator: v
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
