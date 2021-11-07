@@ -71,7 +71,7 @@
     "@meltwater/mlabs-koa": "^10.0.0",
     "awilix": "^4.0.0",
     "koa": "^2.5.0",
-    "prom-client": "^13.0.0"
+    "prom-client": "^14.0.0"
   },
   "devDependencies": {
     "0x": "^4.7.2",
