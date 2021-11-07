@@ -329,7 +329,7 @@
     methods "^1.1.2"
     path-to-regexp "^6.1.0"
 
-"@meltwater/examplr@^6.0.0":
+"@meltwater/examplr@^6.0.0", "@meltwater/examplr@^6.1.0":
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/@meltwater/examplr/-/examplr-6.1.0.tgz#14d05bfe5529a52168bdadda12344fc70463633f"
   integrity sha512-0FCLsNToQvVCOa2yj7Sfqy6pGBPiaiEKSkTTdde7OVXk/tzWxoEMbtESawFM4LBYj4Q1yKMHDNpIlYgKx+0HBg==

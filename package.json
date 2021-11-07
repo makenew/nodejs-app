@@ -75,7 +75,7 @@
   },
   "devDependencies": {
     "0x": "^4.7.2",
-    "@meltwater/examplr": "^6.0.0",
+    "@meltwater/examplr": "^6.1.0",
     "ava": "^3.3.0",
     "del-cli": "^4.0.1",
     "eslint": "^7.4.0",
