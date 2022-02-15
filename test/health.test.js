@@ -5,15 +5,11 @@ import { loadConfig } from '../server/index.js'
 
 test.beforeEach(async (t) => {
   const config = await loadConfig()
-  t.context.httpOptions = {
-    port: config.get('port')
-  }
+  t.context.port = config.get('port')
 })
 
 test('get health', async (t) => {
-  const res = await httpGetJson({
-    ...t.context.httpOptions,
-    path: '/health'
-  })
+  const { port } = t.context
+  const res = await httpGetJson(`http://localhost:${port}/health`)
   t.snapshot(res)
 })
