@@ -67,15 +67,15 @@
     "node": ">=14.15.0"
   },
   "dependencies": {
-    "@meltwater/mlabs-health": "^2.0.0",
-    "@meltwater/mlabs-koa": "^10.0.0",
-    "awilix": "^4.0.0",
+    "@meltwater/mlabs-health": "^2.1.0",
+    "@meltwater/mlabs-koa": "^11.0.0",
+    "awilix": "^6.1.0",
     "koa": "^2.5.0",
     "prom-client": "^14.0.0"
   },
   "devDependencies": {
     "0x": "^4.7.2",
-    "@meltwater/examplr": "^6.1.0",
+    "@meltwater/examplr": "^7.0.0",
     "ava": "^3.3.0",
     "del-cli": "^4.0.1",
     "eslint": "^7.4.0",
