@@ -9,32 +9,27 @@ on:
 jobs:
   test:
     runs-on: ubuntu-20.04
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'
-      - name: Install dependencies
-        run: npm ci
+      - name: Setup
+        uses: ./.github/actions/setup
       - name: Test
         run: npm test
   lint:
     runs-on: ubuntu-20.04
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'
-      - name: Install dependencies
-        run: npm ci
+      - name: Setup
+        uses: ./.github/actions/setup
       - name: Lint
         run: npm run lint
   build:
     runs-on: ubuntu-20.04
+    timeout-minutes: 30
     steps:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -64,6 +59,7 @@ jobs:
   smoke:
     needs: build
     runs-on: ubuntu-20.04
+    timeout-minutes: 30
     services:
       app:
         image: ghcr.io/${{ github.repository }}:${{ github.sha }}
@@ -78,12 +74,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'
-      - name: Install dependencies
-        run: npm ci
+      - name: Setup
+        uses: ./.github/actions/setup
       - name: Test
         run: npm run test:smoke
       - name: Remove CI container image
