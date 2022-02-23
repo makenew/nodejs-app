@@ -57,7 +57,6 @@
     "server:test:watch": "NODE_ENV=test nodemon server.js",
     "server:test:inspect": "NODE_ENV=test node server.js",
     "server:test:inspect:watch": "NODE_ENV=test nodemon --inspect server.js",
-    "profile": "0x --output-dir tmp/0x.{timestamp} --output-html {outputDir}/index.html server.js",
     "format": "npm-run-all --parallel format:*",
     "preformat": "prettier --write --ignore-path .gitignore '**/*.(js|json|yml|yaml|graphql)'",
     "format:js": "eslint --ignore-path .gitignore --fix --ext .js .",
@@ -74,7 +73,6 @@
     "prom-client": "^14.0.0"
   },
   "devDependencies": {
-    "0x": "^4.7.2",
     "@meltwater/examplr": "^7.0.0",
     "ava": "^3.3.0",
     "del-cli": "^4.0.1",
