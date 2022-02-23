@@ -13,6 +13,7 @@ on:
 jobs:
   fix:
     runs-on: ubuntu-20.04
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -21,7 +22,6 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
       - name: Import GPG key
         uses: crazy-max/ghaction-import-gpg@v4
-        id: import_gpg
         with:
           git_user_signingkey: true
           git_commit_gpgsign: true
@@ -29,16 +29,8 @@ jobs:
           git_committer_email: ${{ secrets.GIT_USER_EMAIL }}
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'
-          registry-url: https://npm.pkg.github.com
-          scope: '@${{ github.repository_owner }}'
-      - name: Install dependencies
-        run: npm ci
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Setup
+        uses: ./.github/actions/setup
       - name: Format
         run: npm run format
       - name: Commit
