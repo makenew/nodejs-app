@@ -22,7 +22,7 @@
     "email": "razorx@evansosenko.com"
   },
   "files": [
-    "yarn.lock",
+    "package-lock.json",
     "index.js",
     "server.js",
     "server",
@@ -62,7 +62,8 @@
     "report": "c8 report"
   },
   "engines": {
-    "node": ">=16.13.0"
+    "node": ">=16.13.0",
+    "npm": ">= 8.1.0"
   },
   "dependencies": {
     "@meltwater/mlabs-health": "^2.1.0",
