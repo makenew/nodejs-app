@@ -85,7 +85,7 @@ Bootstrap a new Node.js app in five minutes or less.
    then publish the initial version of the package with
    ```
    $ nvm install
-   $ yarn install
+   $ npm install
    $ npm version patch
    ```
 
@@ -191,14 +191,7 @@ Add this as a dependency to your project using [npm] with
 $ npm install @makenew/nodejs-app
 ```
 
-or using [Yarn] with
-
-```
-$ yarn add @makenew/nodejs-app
-```
-
 [npm]: https://www.npmjs.com/
-[Yarn]: https://yarnpkg.com/
 
 ## Development and Testing
 
@@ -208,22 +201,22 @@ $ yarn add @makenew/nodejs-app
 $ git clone https://github.com/makenew/nodejs-app.git
 $ cd nodejs-app
 $ nvm install
-$ yarn install
+$ npm install
 ```
 
 Run each command below in a separate terminal window:
 
 ```
-$ yarn run test:watch
-$ yarn run server:watch
+$ npm run test:watch
+$ npm run server:watch
 ```
 
 Primary development tasks are defined under `scripts` in `package.json`
-and available via `yarn run`.
+and available via `npm run`.
 View them with
 
 ```
-$ yarn run
+$ npm run
 ```
 
 ### Source code
@@ -239,7 +232,7 @@ $ git clone git@github.com:makenew/nodejs-app.git
 
 ### Requirements
 
-You will need [Node.js] with [npm], [Yarn], and a [Node.js debugging] client.
+You will need [Node.js] with [npm], and a [Node.js debugging] client.
 
 Be sure that all commands run under the correct Node version, e.g.,
 if using [nvm], install the correct version with
@@ -257,7 +250,7 @@ $ nvm use
 Install the development dependencies with
 
 ```
-$ yarn install
+$ npm install
 ```
 
 [Node.js]: https://nodejs.org/
@@ -310,13 +303,13 @@ Set these additional secrets to enable the action:
 Run the server locally with
 
 ```
-$ yarn run server
+$ npm run server
 ```
 
 Run a server that will restart on changes with
 
 ```
-$ yarn run server:watch
+$ npm run server:watch
 ```
 
 ##### Development logging
@@ -354,13 +347,13 @@ hiding all lifecycle events:
 Start a debuggable server with
 
 ```
-$ yarn run server:inspect
+$ npm run server:inspect
 ```
 
 Run a debuggable server that will restart on changes with
 
 ```
-$ yarn run server:inspect:watch
+$ npm run server:inspect:watch
 ```
 
 #### Examples
@@ -370,40 +363,25 @@ $ yarn run server:inspect:watch
 View all examples with
 
 ```
-$ yarn run example
+$ npm run example
 ```
 
 #### Linting
 
-Linting against the [JavaScript Standard Style] and [JSON Lint]
-is handled by [gulp].
-
-View available commands with
-
-```
-$ yarn run gulp --tasks
-```
+Linting is against the [JavaScript Standard Style] and [JSON Lint].
 
 Run all linters with
 
 ```
-$ yarn run lint
-```
-
-In a separate window, use gulp to watch for changes
-and lint JavaScript and JSON files with
-
-```
-$ yarn run watch
+$ npm run lint
 ```
 
 Automatically fix most JavaScript formatting errors with
 
 ```
-$ yarn run format
+$ npm run format
 ```
 
-[gulp]: https://gulpjs.com/
 [JavaScript Standard Style]: https://standardjs.com/
 [JSON Lint]: https://github.com/zaach/jsonlint
 
@@ -421,19 +399,19 @@ and coverage is reported by [Istanbul] and uploaded to [Codecov].
 Watch and run tests on changes with
 
 ```
-$ yarn run test:watch
+$ npm run test:watch
 ```
 
 If using [AVA snapshot testing], update snapshots with
 
 ```
-$ yarn run test:update
+$ npm run test:update
 ```
 
 Generate a coverage report with
 
 ```
-$ yarn run report
+$ npm run report
 ```
 
 An HTML version will be saved in `coverage`.
@@ -444,13 +422,13 @@ Create a breakpoint by adding the statement `debugger` to the test
 and start a debug session with, e.g.,
 
 ```
-$ yarn run test:inspect test/server.spec.js
+$ npm run test:inspect test/server.spec.js
 ```
 
 Watch and restart the debugging session on changes with
 
 ```
-$ yarn run test:inspect:watch test/server.spec.js
+$ npm run test:inspect:watch test/server.spec.js
 ```
 
 ##### Smoke tests
@@ -462,19 +440,19 @@ On GitHub Actions, the tests run against the built container.
 To run smoke tests locally, start a test server with
 
 ```
-$ yarn run server:test
+$ npm run server:test
 ```
 
 and run the tests with
 
 ```
-$ yarn run test:smoke
+$ npm run test:smoke
 ```
 
 or update the test snapshots with
 
 ```
-$ yarn run test:smoke:update
+$ npm run test:smoke:update
 ```
 
 Refer to the full list of scripts for additional watch and debug modes.
