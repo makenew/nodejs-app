@@ -12,9 +12,11 @@ RUN deluser --remove-home node \
 FROM base as preinstall
 
 RUN apk add --no-cache jq
-COPY package.json ./
+COPY package.json package-lock.json ./
 RUN jq '.version="0.0.0"' package.json > package.json.tmp \
- && mv package.json.tmp package.json
+ && mv package.json.tmp package.json \
+ && jq '.version="0.0.0" | .packages[''].version="0.0.0"' package-lock.json > package-lock.json.tmp \
+ && mv package-lock.json.tmp package-lock.json
 
 FROM base as build
 
@@ -24,7 +26,7 @@ RUN tar -xzf *.tgz
 
 FROM base as install
 
-COPY --from=build /usr/src/app/package/package-lock.json ./
+COPY --from=preinstall /usr/src/app/package-lock.json ./
 COPY --from=preinstall /usr/src/app/package.json ./
 RUN npm ci --production
 COPY --from=build /usr/src/app/package .
