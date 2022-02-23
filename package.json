@@ -62,7 +62,7 @@
     "report": "c8 report"
   },
   "engines": {
-    "node": ">=14.15.0"
+    "node": ">=16.13.0"
   },
   "dependencies": {
     "@meltwater/mlabs-health": "^2.1.0",
