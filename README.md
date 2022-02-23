@@ -12,7 +12,7 @@ Bootstrap a new Node.js app in five minutes or less.
 ### Features
 
 - [Node.js] native [ECMAScript module] with [npm] package structure.
-- Fast, reliable, and secure dependency management with [Yarn].
+- Package management with [npm].
 - [Alpine Linux] based multi-stage [Docker] builds for optimized production images.
 - Images tagged using package version and commit checksum.
 - Images pushed to [GitHub Container Registry].
@@ -47,7 +47,6 @@ Bootstrap a new Node.js app in five minutes or less.
 [Prettier]: https://prettier.io/
 [Shields.io]: https://shields.io/
 [c8]: https://github.com/bcoe/c8
-[Yarn]: https://yarnpkg.com/
 [confit]: https://github.com/krakenjs/confit
 [examplr]: https://github.com/meltwater/node-examplr
 [mlabs-health]: https://github.com/meltwater/mlabs-health
