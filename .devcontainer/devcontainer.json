@@ -13,6 +13,6 @@
     "esbenp.prettier-vscode"
   ],
   "forwardPorts": [9000],
-  "postCreateCommand": "yarn install",
+  "postCreateCommand": "npm install",
   "remoteUser": "node"
 }
