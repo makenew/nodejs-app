@@ -19,14 +19,14 @@ RUN jq '.version="0.0.0"' package.json > package.json.tmp \
 FROM base as build
 
 COPY . ./
-RUN yarn pack
+RUN npm pack
 RUN tar -xzf *.tgz
 
 FROM base as install
 
-COPY --from=build /usr/src/app/package/yarn.lock ./
+COPY --from=build /usr/src/app/package/package-lock.json ./
 COPY --from=preinstall /usr/src/app/package.json ./
-RUN yarn install --production --pure-lockfile
+RUN npm ci --production
 COPY --from=build /usr/src/app/package .
 
 FROM base
