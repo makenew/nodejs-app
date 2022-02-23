@@ -27,25 +27,25 @@ Override any option with the corresponding environment variable:
 List all runnable examples with
 
 ```
-$ yarn run example
+$ npm run example
 ```
 
 Run provided examples with, e.g.,
 
 ```
-$ yarn run example health
+$ npm run example health
 ```
 
 Pass arguments to examples with
 
 ```
-$ yarn run example health koa
+$ npm run example health koa
 ```
 
 Automatically watch and rerun an example on changes with, e.g.,
 
 ```
-$ yarn run example:watch health
+$ npm run example:watch health
 ```
 
 #### Debugging examples
@@ -53,7 +53,7 @@ $ yarn run example:watch health
 Debug examples with, e.g.,
 
 ```
-$ yarn run example:inspect health
+$ npm run example:inspect health
 ```
 
 For examples which run a single process and then exit,
@@ -70,7 +70,7 @@ export default ({log}) => async () => {
 Automatically watch and rerun a debuggable example on changes with, e.g.,
 
 ```
-$ yarn run example:inspect:watch health
+$ npm run example:inspect:watch health
 ```
 
 ## Writing New Examples
