@@ -32,12 +32,12 @@
     "docs"
   ],
   "scripts": {
-    "test": "nyc ava",
+    "test": "c8 ava",
     "pretest": "node index.js",
     "test:update": "ava --update-snapshots",
     "test:watch": "ava --watch",
     "test:debug": "ava debug --break",
-    "test:smoke": "SMOKE_TEST=true nyc ava",
+    "test:smoke": "SMOKE_TEST=true c8 ava",
     "test:smoke:update": "SMOKE_TEST=true ava --update-snapshots",
     "test:smoke:watch": "SMOKE_TEST=true ava --watch",
     "test:smoke:debug": "SMOKE_TEST=true ava debug --break",
@@ -60,7 +60,7 @@
     "format": "npm-run-all --parallel format:*",
     "preformat": "prettier --write --ignore-path .gitignore '**/*.(js|json|yml|yaml|graphql)'",
     "format:js": "eslint --ignore-path .gitignore --fix --ext .js .",
-    "report": "nyc report"
+    "report": "c8 report"
   },
   "engines": {
     "node": ">=14.15.0"
@@ -75,6 +75,7 @@
   "devDependencies": {
     "@meltwater/examplr": "^7.0.0",
     "ava": "^3.3.0",
+    "c8": "^7.11.0",
     "del-cli": "^4.0.1",
     "eslint": "^7.4.0",
     "eslint-config-prettier": "^8.3.0",
@@ -84,7 +85,6 @@
     "eslint-plugin-promise": "^5.1.0",
     "nodemon": "^2.0.1",
     "npm-run-all": "^4.1.2",
-    "nyc": "^15.0.0",
     "prettier": "^2.3.0"
   }
 }
