@@ -42,7 +42,7 @@
     "test:smoke:watch": "SMOKE_TEST=true ava --watch",
     "test:smoke:debug": "SMOKE_TEST=true ava debug --break",
     "lint": "npm-run-all --parallel lint:*",
-    "lint:prettier": "prettier --check --ignore-path .gitignore '**/*.(js|json|yml|yaml|graphql)'",
+    "lint:prettier": "prettier --check --ignore-path .gitignore '**/*.(js|cjs|mjs|json|yml|yaml|graphql)'",
     "lint:js": "eslint --ignore-path .gitignore --ext .js .",
     "preversion": "npm-run-all --parallel lint test",
     "postversion": "git push --follow-tags",
@@ -57,7 +57,7 @@
     "server:test:inspect": "NODE_ENV=test node server.js",
     "server:test:inspect:watch": "NODE_ENV=test nodemon --inspect server.js",
     "format": "npm-run-all --parallel format:*",
-    "preformat": "prettier --write --ignore-path .gitignore '**/*.(js|json|yml|yaml|graphql)'",
+    "preformat": "prettier --write --ignore-path .gitignore '**/*.(js|cjs|mjs|json|yml|yaml|graphql)'",
     "format:js": "eslint --ignore-path .gitignore --fix --ext .js .",
     "report": "c8 report"
   },
