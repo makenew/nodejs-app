@@ -1,4 +1,4 @@
-FROM node:fermium-alpine as base
+FROM node:gallium-alpine as base
 
 WORKDIR /usr/src/app
 
