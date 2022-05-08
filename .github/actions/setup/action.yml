@@ -8,7 +8,7 @@ inputs:
     required: false
     default: '16'
   registry_url:
-    description: The Node.js package registry URL.
+    description: The Node.js package registry URL
     required: false
     default: https://registry.npmjs.org
 
