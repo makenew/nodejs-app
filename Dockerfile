@@ -11,12 +11,7 @@ RUN deluser --remove-home node \
 
 FROM base as preinstall
 
-RUN apk add --no-cache jq
 COPY package.json package-lock.json ./
-RUN jq '.version="0.0.0"' package.json > package.json.tmp \
- && mv package.json.tmp package.json \
- && jq '.version="0.0.0" | .packages[''].version="0.0.0"' package-lock.json > package-lock.json.tmp \
- && mv package-lock.json.tmp package-lock.json
 
 FROM base as build
 
