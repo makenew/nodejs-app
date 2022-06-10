@@ -22,9 +22,11 @@ RUN tar -xzf *.tgz
 
 FROM base as install
 
+ENV NODE_ENV=production
+
 COPY --from=preinstall /usr/src/app/package-lock.json ./
 COPY --from=preinstall /usr/src/app/package.json ./
-RUN --mount=type=cache,target=/root/.npm npm ci --production
+RUN --mount=type=cache,target=/root/.npm npm ci
 
 FROM base
 
