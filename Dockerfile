@@ -11,7 +11,8 @@ RUN deluser --remove-home node \
 
 FROM base as preinstall
 
-COPY package.json package-lock.json ./
+COPY package-lock.json ./
+COPY package.json ./
 
 FROM base as build
 
@@ -23,12 +24,12 @@ FROM base as install
 
 COPY --from=preinstall /usr/src/app/package-lock.json ./
 COPY --from=preinstall /usr/src/app/package.json ./
-RUN npm ci --production
-COPY --from=build /usr/src/app/package .
+RUN --mount=type=cache,target=/home/node/.npm npm ci --production
 
 FROM base
 
 COPY --from=install /usr/src/app .
+COPY --from=build /usr/src/app/package .
 
 ENV NODE_ENV=production \
     PORT=8080
