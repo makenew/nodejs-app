@@ -9,11 +9,6 @@ RUN deluser --remove-home node \
  && addgroup -S node -g 10000 \
  && adduser -S -G node -u 10000 node
 
-FROM base as preinstall
-
-COPY package-lock.json ./
-COPY package.json ./
-
 FROM base as build
 
 COPY . ./
@@ -24,8 +19,8 @@ FROM base as install
 
 ENV NODE_ENV=production
 
-COPY --from=preinstall /usr/src/app/package-lock.json ./
-COPY --from=preinstall /usr/src/app/package.json ./
+COPY package-lock.json ./
+COPY package.json ./
 RUN --mount=type=cache,target=/root/.npm npm ci
 
 FROM base
