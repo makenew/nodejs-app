@@ -23,7 +23,7 @@ COPY package-lock.json ./
 COPY package.json ./
 RUN --mount=type=cache,target=/root/.npm npm ci
 
-FROM base
+FROM base as app
 
 COPY --from=install /usr/src/app .
 COPY --from=build /usr/src/app/package .
