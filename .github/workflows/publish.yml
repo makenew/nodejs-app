@@ -45,7 +45,7 @@ jobs:
         id: version
         with:
           result-encoding: string
-          script: return context.github.ref_name.substring(1)
+          script: return context.ref.split('/')[2].substring(1)
       - name: Setup Docker
         uses: ./.github/actions/setup-docker
         with:
