@@ -60,7 +60,7 @@
     "report": "c8 report"
   },
   "engines": {
-    "node": ">=16.13.0",
+    "node": ">=18.12.0",
     "npm": ">= 8.1.0"
   },
   "dependencies": {
