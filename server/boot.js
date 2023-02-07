@@ -42,6 +42,7 @@ export const boot = (exec = defaultExec) => {
     watcher.on('ready', init)
     if (ready) return init()
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error(err)
     process.exit(3)
   }
