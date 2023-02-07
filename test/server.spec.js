@@ -1,4 +1,4 @@
-import fs from 'node:fs'
+import fs from 'node:fs/promises'
 import path from 'node:path'
 import { promisify } from 'node:util'
 
@@ -6,10 +6,8 @@ import test from 'ava'
 
 import { boot } from '../server/index.js'
 
-const readFileAsync = promisify(fs.readFile)
-
 test('creates server config', async (t) => {
-  const fixture = await readFileAsync(path.resolve('fixtures', 'server.json'))
+  const fixture = await fs.readFile(path.resolve('fixtures', 'server.json'))
 
   const configFactory = await new Promise((resolve) =>
     boot((run, configFactory) => resolve(configFactory))
