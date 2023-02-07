@@ -1,8 +1,10 @@
 import path from 'path'
 
 import { createDependencies } from '../index.js'
-import { configure, createServer } from './index.js'
+
 import { logFilters } from './filters.js'
+
+import { configure, createServer } from './index.js'
 
 const defaultExec = (run, configFactory, callback) => {
   run(configFactory)

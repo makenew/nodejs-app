@@ -61,10 +61,11 @@ create a breakpoint by adding the statement `debugger`
 to the top of the example function, e.g.,
 
 ```js
-export default ({log}) => async () => {
-  debugger
-  // ...
-}
+export default ({ log }) =>
+  async () => {
+    debugger
+    // ...
+  }
 ```
 
 Automatically watch and rerun a debuggable example on changes with, e.g.,
@@ -83,37 +84,41 @@ to use server configuration values in your examples._
    in examples should be installed as devDependencies.
    The return value of the function will be logged as `data`.
    All exported functions can take options and arguments with defaults, e.g.,
+
    ```js
    /* examples/query-api.js */
    import got from 'got'
 
-   export default ({
-     log,
-     fooApi = 'https://example.com'
-   }) => async (id = 'foo', page = 1) => {
-     const query = { page: parseInt(page) }
-     log.debug({ query, id })
-     return got(`${fooApi}/search/${id}`, { query })
-   }
+   export default ({ log, fooApi = 'https://example.com' }) =>
+     async (id = 'foo', page = 1) => {
+       const query = { page: parseInt(page) }
+       log.debug({ query, id })
+       return got(`${fooApi}/search/${id}`, { query })
+     }
    ```
+
 2. Import and add the example to `examples/index.js`, e.g.,
+
    ```js
    /* examples/index.js */
    import queryApi from './query-api.js'
 
    export const examples = {
-     queryApi,
+     queryApi
      // ...
    }
    ```
+
 3. Add any new options to this README and in `examples/index.js`, e.g.,
+
    ```js
    /* examples/index.js */
    const envVars = [
-     'FOO_API',
+     'FOO_API'
      // ...
    ]
    ```
+
    ````
    /* examples/README.md */
    ### Local configuration
@@ -136,16 +141,19 @@ to use server configuration values in your examples._
 ## Adding Log Filters
 
 1. Create a new file in `examples` which exports filters, e.g.,
+
    ```js
    /* examples/filters.js */
    // Only print logs with a foo property equal to bar.
-   const onlyFooBar = log => log.foo === 'bar'
+   const onlyFooBar = (log) => log.foo === 'bar'
 
    export default {
      onlyFooBar
    }
    ```
+
 2. Import and add filters to `examples/index.js`, e.g.,
+
    ```js
    /* examples/index.js */
    import filters from './filters.js'
@@ -155,5 +163,6 @@ to use server configuration values in your examples._
      ...
    })
    ```
+
 3. Apply the filter by setting `LOG_FILTER` or `logFilter`,
    e.g., `LOG_FILTER=onlyFooBar`.

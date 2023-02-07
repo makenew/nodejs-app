@@ -1,5 +1,5 @@
-import test from 'ava'
 import { httpGetJson } from '@meltwater/mlabs-koa'
+import test from 'ava'
 
 import { loadConfig } from '../server/index.js'
 
