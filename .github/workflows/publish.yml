@@ -53,6 +53,7 @@ jobs:
     secrets:
       registry_token: ${{ secrets.GITHUB_TOKEN }}
   registry:
+    name: GitHub Container Registry
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
