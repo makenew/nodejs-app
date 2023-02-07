@@ -1,7 +1,7 @@
 ---
-name: version
+name: Version
 
-run-name: ${{ github.event.inputs.version }}
+run-name: Cut ${{ github.event.inputs.version }}
 
 on:
   workflow_dispatch:
@@ -10,7 +10,8 @@ on:
         description: Version to cut
 
 jobs:
-  release:
+  tag:
+    name: Tag
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
