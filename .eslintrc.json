@@ -3,6 +3,22 @@
   "extends": ["standard", "prettier"],
   "rules": {
     "no-console": "warn",
-    "import/extensions": ["error", "ignorePackages"]
+    "import/extensions": ["error", "ignorePackages"],
+    "sort-imports": [
+      "error",
+      {
+        "ignoreDeclarationSort": true,
+        "allowSeparatedGroups": true
+      }
+    ],
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc"
+        }
+      }
+    ]
   }
 }
