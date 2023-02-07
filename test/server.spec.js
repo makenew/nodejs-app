@@ -23,5 +23,5 @@ test('creates server config', async (t) => {
   )
 
   t.regex(config.get('data:path'), /data$/)
-  t.regex(config.get('koa:favicon:path'), /data\/favicon.ico$/)
+  t.regex(config.get('koa:favicon:path'), /favicon.ico$/)
 })
