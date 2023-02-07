@@ -1,16 +1,13 @@
 ---
 name: version
 
-run-name: ${{ github.event.inputs.version }}${{ github.event.client_payload.version }}
+run-name: ${{ github.event.inputs.version }}
 
 on:
   workflow_dispatch:
     inputs:
       version:
         description: Version to cut
-  repository_dispatch:
-    types:
-      - version
 
 jobs:
   release:
@@ -32,5 +29,5 @@ jobs:
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
       - name: Setup
         uses: ./.github/actions/setup
-      - name: Cut ${{ github.event.inputs.version }}${{ github.event.client_payload.version }} version
-        run: npm version --sign-git-tag=true ${{ github.event.inputs.version }}${{ github.event.client_payload.version }}
+      - name: Cut ${{ github.event.inputs.version }} version
+        run: npm version --sign-git-tag=true ${{ github.event.inputs.version }}
