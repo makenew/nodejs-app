@@ -1,7 +1,7 @@
 # Node.js App Skeleton
 
 [![npm](https://img.shields.io/npm/v/@makenew/nodejs-app.svg)](https://www.npmjs.com/package/@makenew/nodejs-app)
-[![GitHub Actions](https://github.com/makenew/nodejs-app/workflows/main/badge.svg)](https://github.com/makenew/nodejs-app/actions)
+[![GitHub Actions](https://github.com/makenew/nodejs-app/actions/workflows/check.yml/badge.svg)](https://github.com/makenew/nodejs-app/actions/workflows/check.yml)
 
 Package skeleton for a Node.js app.
 
