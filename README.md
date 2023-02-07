@@ -57,7 +57,7 @@ Bootstrap a new Node.js app in five minutes or less.
 ### Bootstrapping a new project
 
 1. Create an empty (**non-initialized**) repository on GitHub.
-2. Clone the master branch of this repository with
+2. Clone the main branch of this repository with
    ```
    $ git clone --single-branch git@github.com:makenew/nodejs-app.git <new-node-service>
    $ cd <new-node-service>
@@ -79,7 +79,7 @@ Bootstrap a new Node.js app in five minutes or less.
    $ git diff --cached
    $ git commit -m "Replace makenew boilerplate"
    $ git remote add origin git@github.com:<user>/<new-node-service>.git
-   $ git push -u origin master
+   $ git push -u origin main
    ```
 6. Ensure the GitHub action passes,
    then publish the initial version of the package with
@@ -104,7 +104,7 @@ You can then fetch and merge changes with
 
 ```
 $ git fetch --no-tags upstream
-$ git merge upstream/master
+$ git merge upstream/main
 ```
 
 #### Changelog for this skeleton
@@ -179,7 +179,7 @@ The only officially supported environment variables are
 `LOG_ENV`, `LOG_SYSTEM`, `LOG_SERVICE`, and `LOG_LEVEL`.
 
 [confit]: https://github.com/krakenjs/confit
-[mlabs-koa config]: https://github.com/meltwater/mlabs-koa/tree/master/docs#config-and-middleware
+[mlabs-koa config]: https://github.com/meltwater/mlabs-koa/tree/main/docs#config-and-middleware
 
 ## Installation
 
@@ -313,8 +313,8 @@ $ npm run server:watch
 ##### Development logging
 
 Logging output may be configured according to the
-[`log` config](https://github.com/meltwater/mlabs-koa/tree/master/docs#log)
-and [koa `logger` config](https://github.com/meltwater/mlabs-koa/tree/master/docs#logger).
+[`log` config](https://github.com/meltwater/mlabs-koa/tree/main/docs#log)
+and [koa `logger` config](https://github.com/meltwater/mlabs-koa/tree/main/docs#logger).
 
 - Use `koa.logger.useDev` to toggle between the simple Koa development logger
   and the more verbose Koa production logger.
