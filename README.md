@@ -11,7 +11,7 @@ Bootstrap a new Node.js app in five minutes or less.
 
 ### Features
 
-- [Node.js] native [ECMAScript module] with [npm] package structure.
+- Native [ECMAScript module] for [Node.js].
 - Package management with [npm].
 - [Alpine Linux] based multi-stage [Docker] builds for optimized production images.
 - Images tagged using package version and commit checksum.
