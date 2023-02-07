@@ -30,6 +30,7 @@ Bootstrap a new Node.js app in five minutes or less.
 - [Keep a CHANGELOG].
 - Consistent coding with [EditorConfig].
 - Badges from [Shields.io].
+- Start coding instantly with [GitHub Codespaces].
 
 [AVA]: https://github.com/avajs/ava
 [Alpine Linux]: https://alpinelinux.org/
@@ -40,6 +41,7 @@ Bootstrap a new Node.js app in five minutes or less.
 [EditorConfig]: https://editorconfig.org/
 [GitHub Actions]: https://github.com/features/actions
 [GitHub Container Registry]: https://github.com/features/packages
+[GitHub Codespaces]: https://github.com/features/packages
 [Istanbul]: https://istanbul.js.org/
 [JavaScript Standard Style]: https://standardjs.com/
 [Keep a CHANGELOG]: https://keepachangelog.com/
