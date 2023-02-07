@@ -1,4 +1,7 @@
 {
   "root": true,
-  "extends": ["standard", "prettier"]
+  "extends": ["standard", "prettier"],
+  "rules": {
+    "no-console": "warn"
+  }
 }
