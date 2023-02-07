@@ -1,8 +1,9 @@
-import path from 'path'
+import path from 'node:path'
 
 import { createExamples } from '@meltwater/examplr'
 
 import { boot } from '../server/index.js'
+
 import health from './health.js'
 
 export const examples = {

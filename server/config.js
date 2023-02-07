@@ -1,5 +1,5 @@
+import { promisify } from 'node:util'
 import path from 'path'
-import { promisify } from 'util'
 
 export const configure = async (configFactory, root = process.cwd()) => {
   const config = await getConfig(configFactory)
