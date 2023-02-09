@@ -56,7 +56,6 @@
     "server:test:inspect:watch": "NODE_ENV=test nodemon --inspect server.js",
     "format": "eslint --ignore-path .gitignore --fix --ext .js,.cjs,.mjs .",
     "preformat": "prettier --write --ignore-path .gitignore .",
-    "format:js": "eslint --ignore-path .gitignore --fix --ext .js .",
     "report": "c8 report"
   },
   "engines": {
